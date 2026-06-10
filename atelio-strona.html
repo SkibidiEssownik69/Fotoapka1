@@ -14,6 +14,8 @@
    Atelio — marketing site
    Palette: warm neutrals + deep pine green. No purple, no orange.
    Type: native system stack (SF Pro on Apple devices).
+   The site should feel like a well-designed interior:
+   gallery whites, material swatches, architect's annotations.
    ============================================================ */
 
 :root {
@@ -29,8 +31,6 @@
   --accent-tint: #e8efeb;
   --accent-soft: #9cc2b2;
   --sand: #e9e3d8;
-  --dark: #141413;
-  --dark-card: #1f1f1e;
   --radius: 20px;
   --radius-sm: 12px;
   --pill: 980px;
@@ -101,8 +101,8 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: clamp(2.9rem, 7.2vw, 5.3rem);
-  letter-spacing: -0.028em;
+  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  letter-spacing: -0.03em;
   line-height: 1.02;
 }
 
@@ -130,6 +130,11 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   margin: 0 auto clamp(3.5rem, 7vw, 5.5rem);
 }
 .section-head .lead { margin-top: 1.2rem; }
+.section-head.head-left {
+  text-align: left;
+  margin-left: 0;
+  max-width: 640px;
+}
 
 /* ---------- Buttons ---------- */
 
@@ -151,7 +156,11 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 }
 .btn:active { transform: scale(0.97); }
 
-.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary {
+  background: linear-gradient(180deg, #356a58, var(--accent-dark));
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
 .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(46, 94, 78, 0.6); }
 
 .btn-ghost { background: rgba(29, 29, 31, 0.06); color: var(--ink); }
@@ -227,11 +236,26 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 
 .nav-links { display: flex; gap: 1.9rem; }
 .nav-links a {
+  position: relative;
   font-size: 0.92rem;
   color: var(--ink-2);
+  padding-bottom: 2px;
   transition: color 0.2s ease;
 }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
 .nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { transform: scaleX(1); }
 
 .nav-cta { display: flex; align-items: center; gap: 1.1rem; }
 .nav-login { font-size: 0.92rem; color: var(--ink-2); transition: color 0.2s ease; }
@@ -282,15 +306,19 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 
 /* ---------- Hero ---------- */
 
-.hero {
-  padding: clamp(4rem, 9vw, 7rem) 0 0;
-  text-align: center;
+.hero { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 5rem); }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: center;
 }
 
 .hero-sub {
-  max-width: 640px;
-  margin: 1.6rem auto 0;
-  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-size: clamp(1.08rem, 1.6vw, 1.28rem);
   line-height: 1.5;
   color: var(--ink-2);
   text-wrap: balance;
@@ -298,9 +326,8 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 
 .hero-ctas {
   display: flex;
-  justify-content: center;
   gap: 0.9rem;
-  margin-top: 2.4rem;
+  margin-top: 2.2rem;
   flex-wrap: wrap;
 }
 
@@ -313,9 +340,8 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 .hero-proof {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.9rem;
-  margin-top: 2.6rem;
+  margin-top: 2.4rem;
   flex-wrap: wrap;
 }
 
@@ -352,13 +378,332 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 .stars { display: inline-flex; gap: 2px; }
 .stars svg { width: 14px; height: 14px; fill: var(--ink); }
 
-/* ---------- Hero mockup ---------- */
+/* ---------- Interactive room ---------- */
 
-.hero-visual {
+.room {
+  position: relative;
+  aspect-ratio: 10 / 9;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  background: var(--wall);
+}
+.room, .room * { transition: background-color 0.55s ease, background 0.55s ease; }
+
+/* palettes */
+.room[data-palette="forest"] {
+  --wall: #efece4; --floor: #d8cdb8; --rug: #e7e0d1;
+  --sofa: #2e5e4e; --sofa-2: #264f41; --cushion: #a3b8a5;
+  --art1: #9fb4a2; --art2: #2e5e4e;
+}
+.room[data-palette="sand"] {
+  --wall: #f2ece2; --floor: #ddd2bf; --rug: #f0eadf;
+  --sofa: #c4b094; --sofa-2: #b29e80; --cushion: #2c2c2e;
+  --art1: #e3d7c2; --art2: #8a795d;
+}
+.room[data-palette="stone"] {
+  --wall: #eeeeec; --floor: #d4d4cf; --rug: #e5e5e1;
+  --sofa: #7e8a8c; --sofa-2: #6e7a7c; --cushion: #26262a;
+  --art1: #c9cfd1; --art2: #5d686b;
+}
+.room[data-palette="noir"] {
+  --wall: #eae8e2; --floor: #cfc4ae; --rug: #e0dbd0;
+  --sofa: #26262a; --sofa-2: #1d1d21; --cushion: #9fb4a2;
+  --art1: #3a3a3e; --art2: #9fb4a2;
+}
+
+/* subtle wall panelling */
+.room::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 26% 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 118px, rgba(29, 29, 31, 0.035) 118px 119px);
+  pointer-events: none;
+}
+
+.floor {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 26%;
+  background: var(--floor);
+  border-top: 1px solid rgba(29, 29, 31, 0.07);
+}
+
+.rug {
+  position: absolute;
+  left: 17%;
+  right: 17%;
+  bottom: 8.5%;
+  height: 9.5%;
+  border-radius: 10px;
+  background: var(--rug);
+  box-shadow: inset 0 0 0 3px rgba(29, 29, 31, 0.05);
+}
+
+.art {
+  position: absolute;
+  left: 13%;
+  top: 11%;
+  width: 19%;
+  aspect-ratio: 3 / 3.7;
+  background: linear-gradient(160deg, var(--art1), var(--art2));
+  border: 6px solid #fdfdfb;
+  border-radius: 2px;
+  box-shadow: 0 12px 28px -10px rgba(29, 29, 31, 0.28);
+}
+
+.lamp {
+  position: absolute;
+  right: 12%;
+  bottom: 25%;
+  width: 9%;
+  height: 47%;
+}
+.lamp::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 26%;
+  background: #2f2f33;
+  clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%);
+  border-radius: 3px;
+}
+.lamp::after {
+  content: "";
+  position: absolute;
+  top: 26%;
+  bottom: 0;
+  left: 50%;
+  width: 2.5px;
+  margin-left: -1.25px;
+  background: #2f2f33;
+}
+
+.sofa {
+  position: absolute;
+  left: 50%;
+  bottom: 13.5%;
+  width: 46%;
+  aspect-ratio: 2.55 / 1;
+  transform: translateX(-56%);
+}
+.sofa i { position: absolute; display: block; }
+.sofa-back {
+  inset: 0 0 26% 0;
+  background: var(--sofa);
+  border-radius: 16px 16px 5px 5px;
+}
+.sofa-seat {
+  left: -3.5%;
+  right: -3.5%;
+  bottom: 13%;
+  height: 30%;
+  background: var(--sofa-2);
+  border-radius: 10px;
+}
+.cush {
+  bottom: 40%;
+  width: 23%;
+  height: 36%;
+  background: var(--cushion);
+  border-radius: 7px;
+}
+.cush-1 { left: 13%; transform: rotate(-5deg); }
+.cush-2 { right: 13%; transform: rotate(5deg); }
+.leg {
+  bottom: 0;
+  width: 2.6%;
+  height: 13%;
+  background: #3c3c40;
+  border-radius: 2px;
+}
+.leg-1 { left: 5%; }
+.leg-2 { right: 5%; }
+.sofa::after {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  bottom: -4%;
+  height: 10%;
+  background: radial-gradient(50% 100% at 50% 0, rgba(29, 29, 31, 0.16), transparent 70%);
+}
+
+/* architect's dimension lines */
+.dim {
+  position: absolute;
+  color: var(--ink-2);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+.dim::before, .dim::after {
+  content: "";
+  position: absolute;
+  background: rgba(29, 29, 31, 0.4);
+}
+.dim-w {
+  left: 24%;
+  right: 24%;
+  bottom: 3.6%;
+  border-top: 1px solid rgba(29, 29, 31, 0.4);
+}
+.dim-w::before { left: 0; top: -4px; width: 1px; height: 9px; }
+.dim-w::after { right: 0; top: -4px; width: 1px; height: 9px; }
+.dim-w span {
+  position: absolute;
+  top: -1.9em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dim-h {
+  top: 12%;
+  bottom: 30%;
+  right: 5.5%;
+  border-left: 1px solid rgba(29, 29, 31, 0.4);
+}
+.dim-h::before { top: 0; left: -4px; width: 9px; height: 1px; }
+.dim-h::after { bottom: 0; left: -4px; width: 9px; height: 1px; }
+.dim-h span {
+  position: absolute;
+  top: 50%;
+  left: 0.55em;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+}
+
+/* palette dock */
+.pal-dock {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  width: fit-content;
+  margin: -26px auto 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  padding: 5px;
+  box-shadow: var(--shadow-lg);
+}
+.pal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--pill);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.pal-btn:hover { color: var(--ink); }
+.pal-btn.active { background: var(--accent-tint); color: var(--accent-deep); }
+.pal-chips { display: inline-flex; }
+.pal-chips i {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.1), 0 0 0 2px #fff;
+}
+.pal-chips i + i { margin-left: -4px; }
+
+.stage-cap {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-3);
+  margin-top: 1rem;
+}
+
+/* ---------- Logos marquee ---------- */
+
+.logos { padding: clamp(3rem, 6vw, 4.5rem) 0; }
+.logos-label {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--ink-3);
+  margin-bottom: 1.8rem;
+}
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+.marquee-track {
+  display: flex;
+  gap: 3.6rem;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-group {
+  display: flex;
+  align-items: baseline;
+  gap: 3.6rem;
+  flex: none;
+}
+@keyframes marquee {
+  to { transform: translateX(calc(-50% - 1.8rem)); }
+}
+.logo-name {
+  color: var(--ink-3);
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.logo-name:nth-child(odd) { letter-spacing: 0.14em; font-size: 0.88rem; }
+
+/* ---------- Workspace ---------- */
+
+.workspace { padding: clamp(4rem, 8vw, 6.5rem) 0; }
+
+.workspace-frame {
   position: relative;
   max-width: 1020px;
-  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+  margin: 0 auto;
+  padding-top: 4.6rem;
 }
+
+.anno {
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: center;
+}
+.anno::after {
+  content: "";
+  width: 1px;
+  height: 40px;
+  background: var(--ink-3);
+}
+.anno i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: -0.2rem;
+}
+.anno-1 { left: 9%; }
+.anno-2 { right: 9%; }
 
 .window {
   background: #fff;
@@ -511,24 +856,6 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 }
 .note-text { font-size: 0.8rem; color: var(--ink-2); line-height: 1.45; }
 
-/* Floating cards */
-
-.float {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: var(--shadow-lg);
-  padding: 0.8rem 1.1rem;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: var(--ink-2);
-  text-align: left;
-}
-.float strong { color: var(--ink); font-size: 0.84rem; }
 .float-ic {
   width: 28px;
   height: 28px;
@@ -542,59 +869,9 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 }
 .float-ic svg { width: 14px; height: 14px; }
 
-.float-approve { top: 14%; right: -3.5rem; animation: floaty 7s ease-in-out infinite; }
-.float-invoice { bottom: 10%; left: -3.5rem; animation: floaty 8s ease-in-out 1.2s infinite; }
-
-@keyframes floaty {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-9px); }
-}
-
-/* ---------- Logos ---------- */
-
-.logos { padding: clamp(3.5rem, 7vw, 5.5rem) 0; }
-.logos-label {
-  text-align: center;
-  font-size: 0.86rem;
-  color: var(--ink-3);
-  margin-bottom: 1.8rem;
-}
-.logos-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: baseline;
-  gap: 1.4rem 3.2rem;
-}
-.logo-name {
-  color: var(--ink-3);
-  font-weight: 700;
-  font-size: 1.02rem;
-  letter-spacing: 0.04em;
-}
-.logo-name:nth-child(odd) { letter-spacing: 0.14em; font-size: 0.88rem; }
-
-/* ---------- Stats ---------- */
-
-.stats { border-block: 1px solid var(--line); padding: clamp(3rem, 6vw, 4.5rem) 0; }
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  text-align: center;
-}
-.stat-num {
-  display: block;
-  font-size: clamp(2.1rem, 3.6vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-.stat-label { display: block; margin-top: 0.4rem; font-size: 0.92rem; color: var(--ink-2); }
-
 /* ---------- Features / showcases ---------- */
 
-.features { padding: clamp(5rem, 10vw, 8.5rem) 0; }
+.features { padding: clamp(3rem, 6vw, 5rem) 0 clamp(5rem, 10vw, 8.5rem); }
 
 .show-row {
   display: grid;
@@ -823,79 +1100,134 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 .more-card h4 { font-size: 1.02rem; margin-bottom: 0.4rem; }
 .more-card p { font-size: 0.9rem; color: var(--ink-2); line-height: 1.55; }
 
+/* ---------- Statement + stats ---------- */
+
+.statement {
+  background: linear-gradient(180deg, var(--accent-deep) 0%, #18342c 100%);
+  color: #fff;
+  padding: clamp(5rem, 10vw, 8.5rem) 0;
+}
+.statement h2 {
+  font-size: clamp(2.3rem, 5.2vw, 4.2rem);
+  letter-spacing: -0.028em;
+  max-width: 17ch;
+}
+.statement-sub {
+  margin-top: 1.4rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 46ch;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: clamp(3rem, 6vw, 4.8rem);
+}
+.stat { border-top: 1px solid rgba(255, 255, 255, 0.22); padding-top: 1.2rem; }
+.stat-num {
+  display: block;
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.stat-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
 /* ---------- How it works ---------- */
 
 .how { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) 0; }
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
+  gap: 2.5rem;
 }
-.step {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 2rem 1.9rem;
-}
+.step { border-top: 1.5px solid var(--ink); padding-top: 1.5rem; }
 .step-num {
-  display: inline-block;
-  font-size: 0.8rem;
+  display: block;
+  font-size: clamp(2.4rem, 3.6vw, 3.2rem);
   font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--accent);
-  background: var(--accent-tint);
-  border-radius: var(--pill);
-  padding: 0.3rem 0.85rem;
-  margin-bottom: 1.3rem;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: rgba(29, 29, 31, 0.18);
+  margin-bottom: 1rem;
 }
 .step h3 { font-size: 1.22rem; margin-bottom: 0.55rem; }
 .step p { font-size: 0.94rem; color: var(--ink-2); line-height: 1.6; }
 
 /* ---------- Testimonials ---------- */
 
-.quotes {
-  background: var(--dark);
-  color: #fff;
-  padding: clamp(5rem, 10vw, 8.5rem) 0;
-}
-.quotes .eyebrow { color: var(--accent-soft); }
-.quotes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-}
-.quote-card {
-  background: var(--dark-card);
-  border-radius: var(--radius);
-  padding: 2rem 1.9rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
+.quotes { padding: clamp(5rem, 10vw, 8.5rem) 0; }
+
 .quote-metric {
-  font-size: 0.78rem;
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-soft);
+  color: var(--accent-deep);
+  background: var(--accent-tint);
+  border-radius: var(--pill);
+  padding: 0.3rem 0.85rem;
+}
+
+.quote-hero {
+  max-width: 880px;
+  margin: 0 auto clamp(3.5rem, 7vw, 5.5rem);
+  text-align: center;
+}
+.quote-hero blockquote {
+  margin-top: 1.6rem;
+  font-size: clamp(1.55rem, 3.2vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.28;
+  text-wrap: balance;
+}
+.quote-hero figcaption {
+  margin-top: 1.6rem;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.quote-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.9rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 .quote-card blockquote {
-  font-size: 1.06rem;
+  font-size: 1rem;
   line-height: 1.55;
-  color: #d8d8d5;
-  letter-spacing: -0.005em;
+  color: var(--ink);
   flex: 1;
 }
 .quote-card figcaption {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   line-height: 1.4;
-  color: #97978f;
+  color: var(--ink-2);
 }
-.quote-card figcaption strong { color: #fff; font-size: 0.92rem; }
-.quote-card .av { border-color: var(--dark-card); }
+.quote-card figcaption strong { color: var(--ink); font-size: 0.9rem; }
+.quote-card .av { border-color: #fff; }
 
 /* ---------- Pricing ---------- */
 
@@ -942,15 +1274,17 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   flex-direction: column;
 }
 .plan.featured {
-  border: 1.5px solid var(--accent);
+  background: linear-gradient(180deg, #234c3f, #1b3b31);
+  border: none;
   box-shadow: var(--shadow-lg);
+  color: #fff;
 }
 .badge-pop {
   position: absolute;
   top: -13px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent);
+  background: var(--ink);
   color: #fff;
   font-size: 0.74rem;
   font-weight: 700;
@@ -959,8 +1293,10 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   border-radius: var(--pill);
   white-space: nowrap;
 }
+.featured .badge-pop { background: #fff; color: var(--accent-deep); }
 .plan-name { font-size: 1.3rem; }
 .plan-for { font-size: 0.9rem; color: var(--ink-2); margin-top: 0.25rem; }
+.featured .plan-for { color: rgba(255, 255, 255, 0.65); }
 .plan-price { margin-top: 1.5rem; display: flex; align-items: baseline; gap: 0.25rem; }
 .plan-price .amount {
   font-size: 3rem;
@@ -969,9 +1305,12 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   line-height: 1;
 }
 .plan-price .per { color: var(--ink-2); font-size: 1rem; }
+.featured .plan-price .per { color: rgba(255, 255, 255, 0.6); }
 .plan-billed { font-size: 0.82rem; color: var(--ink-3); margin: 0.35rem 0 1.5rem; }
+.featured .plan-billed { color: rgba(255, 255, 255, 0.5); }
 .plan .btn { margin-bottom: 1.7rem; }
 .plan-list { list-style: none; display: grid; gap: 0.7rem; font-size: 0.93rem; color: var(--ink-2); }
+.featured .plan-list { color: rgba(255, 255, 255, 0.78); }
 .plan-list li { display: flex; gap: 0.6rem; align-items: baseline; }
 .plan-list li::before {
   content: "✓";
@@ -979,7 +1318,9 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   font-weight: 700;
   flex: none;
 }
+.featured .plan-list li::before { color: var(--accent-soft); }
 .plan-list li strong { color: var(--ink); }
+.featured .plan-list li strong { color: #fff; }
 .plan-list li:has(strong)::before { content: ""; display: none; }
 
 .guarantee {
@@ -1068,11 +1409,12 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   font-size: 1.12rem;
   line-height: 1.5;
 }
+.cta-ctas { justify-content: center; }
 .cta-note { font-size: 0.88rem !important; color: rgba(255, 255, 255, 0.5) !important; margin-top: 1.2rem !important; }
 
 /* ---------- Footer ---------- */
 
-.footer { padding: clamp(3.5rem, 7vw, 5.5rem) 0 2.5rem; }
+.footer { padding: clamp(3.5rem, 7vw, 5.5rem) 0 0; overflow: hidden; }
 .foot-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
@@ -1099,6 +1441,18 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   font-size: 0.84rem;
   color: var(--ink-3);
 }
+.foot-mark {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  font-size: clamp(4.5rem, 17vw, 13rem);
+  line-height: 0.78;
+  color: rgba(29, 29, 31, 0.05);
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: -0.13em;
+  user-select: none;
+  pointer-events: none;
+}
 
 /* ---------- Reveal animations ---------- */
 
@@ -1113,7 +1467,14 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .float-approve, .float-invoice { animation: none; }
+  .marquee-track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .marquee-group[aria-hidden] { display: none; }
+  .marquee { mask-image: none; -webkit-mask-image: none; }
   .faq-item.open .faq-a { animation: none; }
   * { transition-duration: 0.01ms !important; }
 }
@@ -1122,8 +1483,13 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
 
 @media (max-width: 1024px) {
   .more-grid { grid-template-columns: repeat(2, 1fr); }
-  .float-approve { right: -0.5rem; }
-  .float-invoice { left: -0.5rem; }
+}
+
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .hero-stage { max-width: 560px; margin: 0 auto; width: 100%; }
+  .anno { display: none; }
+  .workspace-frame { padding-top: 0; }
 }
 
 @media (max-width: 880px) {
@@ -1140,11 +1506,9 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   .board { grid-template-columns: repeat(2, 1fr); }
   .t-img2 { display: none; }
 
-  .float-approve { top: -1.4rem; right: 0.4rem; }
-  .float-invoice { bottom: -1.2rem; left: 0.4rem; }
-
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .steps, .quotes-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 2rem; }
+  .quotes-grid { grid-template-columns: 1fr; }
 
   .plans { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; }
   .plan.featured { order: -1; }
@@ -1161,6 +1525,7 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   .pb-tile { aspect-ratio: 1 / 0.72; }
   .banner { font-size: 0.8rem; }
   .guarantee { flex-direction: column; text-align: center; }
+  .pal-btn { padding: 0.45rem 0.7rem; font-size: 0.78rem; }
 }
 
 </style>
@@ -1215,35 +1580,110 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
   <main id="main">
     <!-- Hero -->
     <section class="hero" id="top">
-      <div class="container">
-        <h1 class="reveal">Interior design,<br />minus the admin.</h1>
-        <p class="hero-sub reveal" style="--d:80ms">Atelio brings moodboards, floor plans, sourcing, client approvals, and invoicing into one calm workspace — so your hours go into rooms, not spreadsheets.</p>
-        <div class="hero-ctas reveal" style="--d:160ms">
-          <a class="btn btn-primary btn-lg" href="#pricing">Start free trial</a>
-          <a class="btn btn-ghost btn-lg" href="#features">See it in action</a>
-        </div>
-        <p class="hero-note reveal" style="--d:220ms">Free for 14 days · No credit card · Cancel anytime</p>
-        <div class="hero-proof reveal" style="--d:280ms">
-          <div class="avatars" aria-hidden="true">
-            <span class="av av-1">ML</span>
-            <span class="av av-2">DR</span>
-            <span class="av av-3">AH</span>
-            <span class="av av-4">JK</span>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="reveal">Interior design, minus the admin.</h1>
+          <p class="hero-sub reveal" style="--d:80ms">Moodboards, floor plans, sourcing, approvals, and invoicing in one calm workspace — so your hours go into rooms, not spreadsheets.</p>
+          <div class="hero-ctas reveal" style="--d:160ms">
+            <a class="btn btn-primary btn-lg" href="#pricing">Start free trial</a>
+            <a class="btn btn-ghost btn-lg" href="#features">See it in action</a>
           </div>
-          <div class="proof-text">
-            <span class="stars" aria-label="Rated 4.9 out of 5">
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-            </span>
-            <span><strong>4.9/5</strong> from 2,400+ studios</span>
+          <p class="hero-note reveal" style="--d:220ms">Free for 14 days · No credit card · Cancel anytime</p>
+          <div class="hero-proof reveal" style="--d:280ms">
+            <div class="avatars" aria-hidden="true">
+              <span class="av av-1">ML</span>
+              <span class="av av-2">DR</span>
+              <span class="av av-3">AH</span>
+              <span class="av av-4">JK</span>
+            </div>
+            <div class="proof-text">
+              <span class="stars" aria-label="Rated 4.9 out of 5">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+              </span>
+              <span><strong>4.9/5</strong> from 2,400+ studios</span>
+            </div>
           </div>
         </div>
 
-        <!-- Product mockup -->
-        <div class="hero-visual reveal" style="--d:340ms">
+        <!-- Interactive room -->
+        <div class="hero-stage reveal" style="--d:200ms">
+          <div class="room" id="room" data-palette="forest" role="img" aria-label="Illustrated living room that recolors with the selected palette">
+            <div class="art" aria-hidden="true"></div>
+            <div class="lamp" aria-hidden="true"></div>
+            <div class="floor" aria-hidden="true"></div>
+            <div class="rug" aria-hidden="true"></div>
+            <div class="sofa" aria-hidden="true">
+              <i class="sofa-back"></i>
+              <i class="cush cush-1"></i>
+              <i class="cush cush-2"></i>
+              <i class="sofa-seat"></i>
+              <i class="leg leg-1"></i>
+              <i class="leg leg-2"></i>
+            </div>
+            <div class="dim dim-w" aria-hidden="true"><span>3.2 m</span></div>
+            <div class="dim dim-h" aria-hidden="true"><span>2.7 m</span></div>
+          </div>
+          <div class="pal-dock" role="group" aria-label="Choose a palette">
+            <button type="button" class="pal-btn active" data-palette="forest" aria-pressed="true">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#2e5e4e"></i><i style="background:#a3b8a5"></i><i style="background:#d8cdb8"></i></span>Forest
+            </button>
+            <button type="button" class="pal-btn" data-palette="sand" aria-pressed="false">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#c4b094"></i><i style="background:#2c2c2e"></i><i style="background:#efe6d8"></i></span>Sand
+            </button>
+            <button type="button" class="pal-btn" data-palette="stone" aria-pressed="false">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#7e8a8c"></i><i style="background:#26262a"></i><i style="background:#e2e2de"></i></span>Stone
+            </button>
+            <button type="button" class="pal-btn" data-palette="noir" aria-pressed="false">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#26262a"></i><i style="background:#9fb4a2"></i><i style="background:#cfc4ae"></i></span>Noir
+            </button>
+          </div>
+          <p class="stage-cap">Go on — click a palette. This is exactly how clients pick finishes in Atelio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logos marquee -->
+    <section class="logos">
+      <div class="container">
+        <p class="logos-label reveal">Trusted by 12,000+ studios and independent designers</p>
+      </div>
+      <div class="marquee reveal" style="--d:100ms">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span class="logo-name">NORD&nbsp;STUDIO</span>
+            <span class="logo-name">Casa&nbsp;Norte</span>
+            <span class="logo-name">FORM+FIELD</span>
+            <span class="logo-name">Maison&nbsp;Verde</span>
+            <span class="logo-name">Studio&nbsp;Lindholm</span>
+            <span class="logo-name">ELM&nbsp;Interiors</span>
+          </div>
+          <div class="marquee-group" aria-hidden="true">
+            <span class="logo-name">NORD&nbsp;STUDIO</span>
+            <span class="logo-name">Casa&nbsp;Norte</span>
+            <span class="logo-name">FORM+FIELD</span>
+            <span class="logo-name">Maison&nbsp;Verde</span>
+            <span class="logo-name">Studio&nbsp;Lindholm</span>
+            <span class="logo-name">ELM&nbsp;Interiors</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workspace -->
+    <section class="workspace">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">The workspace</p>
+          <h2>From hello to handover,<br />one tab.</h2>
+          <p class="lead">One subscription replaces the six tools your studio duct-tapes together today.</p>
+        </div>
+        <div class="workspace-frame reveal" style="--d:120ms">
+          <div class="anno anno-1" aria-hidden="true"><span>Live boards &amp; comments</span><i></i></div>
+          <div class="anno anno-2" aria-hidden="true"><span>Approvals, on the record</span><i></i></div>
           <div class="window" role="img" aria-label="Screenshot of the Atelio app showing a moodboard for a living room project">
             <div class="window-bar">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
@@ -1318,54 +1758,6 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
               </div>
             </div>
           </div>
-          <div class="float float-approve" aria-hidden="true">
-            <span class="float-ic">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>
-            </span>
-            <span><strong>Living room approved</strong><br />Sarah M. · just now</span>
-          </div>
-          <div class="float float-invoice" aria-hidden="true">
-            <span><strong>Invoice #142 — paid</strong><br />$4,820.00 · Apple&nbsp;Pay</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Logos -->
-    <section class="logos">
-      <div class="container">
-        <p class="logos-label reveal">Trusted by 12,000+ studios and independent designers</p>
-        <div class="logos-row reveal" style="--d:100ms" aria-label="Customer logos">
-          <span class="logo-name">NORD&nbsp;STUDIO</span>
-          <span class="logo-name">Casa&nbsp;Norte</span>
-          <span class="logo-name">FORM+FIELD</span>
-          <span class="logo-name">Maison&nbsp;Verde</span>
-          <span class="logo-name">Studio&nbsp;Lindholm</span>
-          <span class="logo-name">ELM&nbsp;Interiors</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat reveal">
-            <span class="stat-num"><span class="count" data-target="12400" data-suffix="+">0</span></span>
-            <span class="stat-label">studios run on Atelio</span>
-          </div>
-          <div class="stat reveal" style="--d:80ms">
-            <span class="stat-num"><span class="count" data-target="38" data-suffix="%">0</span></span>
-            <span class="stat-label">faster client approvals</span>
-          </div>
-          <div class="stat reveal" style="--d:160ms">
-            <span class="stat-num"><span class="count" data-target="480" data-prefix="$" data-suffix="M">0</span></span>
-            <span class="stat-label">in projects managed yearly</span>
-          </div>
-          <div class="stat reveal" style="--d:240ms">
-            <span class="stat-num"><span class="count" data-target="11" data-suffix="&nbsp;hrs">0</span></span>
-            <span class="stat-label">saved per designer, weekly</span>
-          </div>
         </div>
       </div>
     </section>
@@ -1373,12 +1765,6 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
     <!-- Features -->
     <section class="features" id="features">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">The platform</p>
-          <h2>Everything between<br />hello and handover.</h2>
-          <p class="lead">One subscription replaces the six tools your studio duct-tapes together today.</p>
-        </div>
-
         <!-- Showcase: Moodboards -->
         <div class="show-row reveal">
           <div class="show-text">
@@ -1559,10 +1945,36 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
       </div>
     </section>
 
+    <!-- Statement + stats -->
+    <section class="statement">
+      <div class="container">
+        <h2 class="reveal">Software should feel like a well-designed room.</h2>
+        <p class="statement-sub reveal" style="--d:80ms">Nothing extra. Everything in its place. Atelio is the quiet system behind thousands of studios.</p>
+        <div class="stats-grid">
+          <div class="stat reveal">
+            <span class="stat-num"><span class="count" data-target="12400" data-suffix="+">0</span></span>
+            <span class="stat-label">studios run on Atelio</span>
+          </div>
+          <div class="stat reveal" style="--d:80ms">
+            <span class="stat-num"><span class="count" data-target="38" data-suffix="%">0</span></span>
+            <span class="stat-label">faster client approvals</span>
+          </div>
+          <div class="stat reveal" style="--d:160ms">
+            <span class="stat-num"><span class="count" data-target="480" data-prefix="$" data-suffix="M">0</span></span>
+            <span class="stat-label">in projects managed yearly</span>
+          </div>
+          <div class="stat reveal" style="--d:240ms">
+            <span class="stat-num"><span class="count" data-target="11" data-suffix="&nbsp;hrs">0</span></span>
+            <span class="stat-label">saved per designer, weekly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- How it works -->
     <section class="how" id="how">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head head-left reveal">
           <p class="eyebrow">How it works</p>
           <h2>Up and running<br />in an afternoon.</h2>
         </div>
@@ -1589,10 +2001,11 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
     <!-- Testimonials -->
     <section class="quotes" id="stories">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">From the studios</p>
-          <h2>Designers run better<br />businesses on Atelio.</h2>
-        </div>
+        <figure class="quote-hero reveal">
+          <span class="quote-metric">Paid for itself in month one</span>
+          <blockquote>“One invoice that would have slipped through the cracks got auto-chased and paid. That alone covered Atelio for the year.”</blockquote>
+          <figcaption>Daniel Reyes — Principal, Casa Norte, Austin</figcaption>
+        </figure>
         <div class="quotes-grid">
           <figure class="quote-card reveal">
             <span class="quote-metric">2 weeks → 2 days</span>
@@ -1603,14 +2016,6 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
             </figcaption>
           </figure>
           <figure class="quote-card reveal" style="--d:100ms">
-            <span class="quote-metric">Paid for itself in month one</span>
-            <blockquote>“One invoice that would have slipped through the cracks got auto-chased and paid. That alone covered Atelio for the year.”</blockquote>
-            <figcaption>
-              <span class="av av-2" aria-hidden="true">DR</span>
-              <span><strong>Daniel Reyes</strong><br />Principal, Casa Norte — Austin</span>
-            </figcaption>
-          </figure>
-          <figure class="quote-card reveal" style="--d:200ms">
             <span class="quote-metric">40-email threads → one link</span>
             <blockquote>“Clients approve rooms in the app instead of marathon email threads. It changed the way our studio feels to work in.”</blockquote>
             <figcaption>
@@ -1659,7 +2064,7 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
             <p class="plan-for">For growing teams</p>
             <p class="plan-price"><span class="amount" data-m="79" data-a="63">$63</span><span class="per">/mo</span></p>
             <p class="plan-billed" data-m="billed monthly" data-a="billed annually">billed annually</p>
-            <a class="btn btn-primary btn-block" href="#pricing">Start free trial</a>
+            <a class="btn btn-light btn-block" href="#pricing">Start free trial</a>
             <ul class="plan-list">
               <li><strong>Everything in Solo, plus:</strong></li>
               <li>5 seats included</li>
@@ -1766,7 +2171,7 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
       <div class="container">
         <h2 class="reveal">Your next project deserves<br />a better back office.</h2>
         <p class="reveal" style="--d:80ms">Join 12,000+ studios that swapped the spreadsheet shuffle for one calm workspace.</p>
-        <div class="hero-ctas reveal" style="--d:160ms">
+        <div class="hero-ctas cta-ctas reveal" style="--d:160ms">
           <a class="btn btn-light btn-lg" href="#pricing">Start free trial</a>
           <a class="btn btn-outline btn-lg" href="#pricing">Talk to sales</a>
         </div>
@@ -1819,6 +2224,7 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
         <p>© <span id="year">2026</span> Atelio, Inc. All rights reserved.</p>
         <p>Designed with restraint.</p>
       </div>
+      <div class="foot-mark" aria-hidden="true">Atelio</div>
     </div>
   </footer>
 
@@ -1915,6 +2321,20 @@ h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
     );
     counters.forEach((el) => cio.observe(el));
   }
+
+  /* ---------- Hero room palette switcher ---------- */
+  const room = document.getElementById("room");
+  const palButtons = document.querySelectorAll(".pal-btn");
+  palButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      room.dataset.palette = btn.dataset.palette;
+      palButtons.forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-pressed", String(on));
+      });
+    });
+  });
 
   /* ---------- Pricing toggle ---------- */
   const btnMonthly = document.getElementById("btnMonthly");

@@ -61,35 +61,110 @@
   <main id="main">
     <!-- Hero -->
     <section class="hero" id="top">
-      <div class="container">
-        <h1 class="reveal">Interior design,<br />minus the admin.</h1>
-        <p class="hero-sub reveal" style="--d:80ms">Atelio brings moodboards, floor plans, sourcing, client approvals, and invoicing into one calm workspace — so your hours go into rooms, not spreadsheets.</p>
-        <div class="hero-ctas reveal" style="--d:160ms">
-          <a class="btn btn-primary btn-lg" href="#pricing">Start free trial</a>
-          <a class="btn btn-ghost btn-lg" href="#features">See it in action</a>
-        </div>
-        <p class="hero-note reveal" style="--d:220ms">Free for 14 days · No credit card · Cancel anytime</p>
-        <div class="hero-proof reveal" style="--d:280ms">
-          <div class="avatars" aria-hidden="true">
-            <span class="av av-1">ML</span>
-            <span class="av av-2">DR</span>
-            <span class="av av-3">AH</span>
-            <span class="av av-4">JK</span>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="reveal">Interior design, minus the admin.</h1>
+          <p class="hero-sub reveal" style="--d:80ms">Moodboards, floor plans, sourcing, approvals, and invoicing in one calm workspace — so your hours go into rooms, not spreadsheets.</p>
+          <div class="hero-ctas reveal" style="--d:160ms">
+            <a class="btn btn-primary btn-lg" href="#pricing">Start free trial</a>
+            <a class="btn btn-ghost btn-lg" href="#features">See it in action</a>
           </div>
-          <div class="proof-text">
-            <span class="stars" aria-label="Rated 4.9 out of 5">
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
-            </span>
-            <span><strong>4.9/5</strong> from 2,400+ studios</span>
+          <p class="hero-note reveal" style="--d:220ms">Free for 14 days · No credit card · Cancel anytime</p>
+          <div class="hero-proof reveal" style="--d:280ms">
+            <div class="avatars" aria-hidden="true">
+              <span class="av av-1">ML</span>
+              <span class="av av-2">DR</span>
+              <span class="av av-3">AH</span>
+              <span class="av av-4">JK</span>
+            </div>
+            <div class="proof-text">
+              <span class="stars" aria-label="Rated 4.9 out of 5">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+              </span>
+              <span><strong>4.9/5</strong> from 2,400+ studios</span>
+            </div>
           </div>
         </div>
 
-        <!-- Product mockup -->
-        <div class="hero-visual reveal" style="--d:340ms">
+        <!-- Interactive room -->
+        <div class="hero-stage reveal" style="--d:200ms">
+          <div class="room" id="room" data-palette="forest" role="img" aria-label="Illustrated living room that recolors with the selected palette">
+            <div class="art" aria-hidden="true"></div>
+            <div class="lamp" aria-hidden="true"></div>
+            <div class="floor" aria-hidden="true"></div>
+            <div class="rug" aria-hidden="true"></div>
+            <div class="sofa" aria-hidden="true">
+              <i class="sofa-back"></i>
+              <i class="cush cush-1"></i>
+              <i class="cush cush-2"></i>
+              <i class="sofa-seat"></i>
+              <i class="leg leg-1"></i>
+              <i class="leg leg-2"></i>
+            </div>
+            <div class="dim dim-w" aria-hidden="true"><span>3.2 m</span></div>
+            <div class="dim dim-h" aria-hidden="true"><span>2.7 m</span></div>
+          </div>
+          <div class="pal-dock" role="group" aria-label="Choose a palette">
+            <button type="button" class="pal-btn active" data-palette="forest" aria-pressed="true">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#2e5e4e"></i><i style="background:#a3b8a5"></i><i style="background:#d8cdb8"></i></span>Forest
+            </button>
+            <button type="button" class="pal-btn" data-palette="sand" aria-pressed="false">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#c4b094"></i><i style="background:#2c2c2e"></i><i style="background:#efe6d8"></i></span>Sand
+            </button>
+            <button type="button" class="pal-btn" data-palette="stone" aria-pressed="false">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#7e8a8c"></i><i style="background:#26262a"></i><i style="background:#e2e2de"></i></span>Stone
+            </button>
+            <button type="button" class="pal-btn" data-palette="noir" aria-pressed="false">
+              <span class="pal-chips" aria-hidden="true"><i style="background:#26262a"></i><i style="background:#9fb4a2"></i><i style="background:#cfc4ae"></i></span>Noir
+            </button>
+          </div>
+          <p class="stage-cap">Go on — click a palette. This is exactly how clients pick finishes in Atelio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logos marquee -->
+    <section class="logos">
+      <div class="container">
+        <p class="logos-label reveal">Trusted by 12,000+ studios and independent designers</p>
+      </div>
+      <div class="marquee reveal" style="--d:100ms">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span class="logo-name">NORD&nbsp;STUDIO</span>
+            <span class="logo-name">Casa&nbsp;Norte</span>
+            <span class="logo-name">FORM+FIELD</span>
+            <span class="logo-name">Maison&nbsp;Verde</span>
+            <span class="logo-name">Studio&nbsp;Lindholm</span>
+            <span class="logo-name">ELM&nbsp;Interiors</span>
+          </div>
+          <div class="marquee-group" aria-hidden="true">
+            <span class="logo-name">NORD&nbsp;STUDIO</span>
+            <span class="logo-name">Casa&nbsp;Norte</span>
+            <span class="logo-name">FORM+FIELD</span>
+            <span class="logo-name">Maison&nbsp;Verde</span>
+            <span class="logo-name">Studio&nbsp;Lindholm</span>
+            <span class="logo-name">ELM&nbsp;Interiors</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workspace -->
+    <section class="workspace">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">The workspace</p>
+          <h2>From hello to handover,<br />one tab.</h2>
+          <p class="lead">One subscription replaces the six tools your studio duct-tapes together today.</p>
+        </div>
+        <div class="workspace-frame reveal" style="--d:120ms">
+          <div class="anno anno-1" aria-hidden="true"><span>Live boards &amp; comments</span><i></i></div>
+          <div class="anno anno-2" aria-hidden="true"><span>Approvals, on the record</span><i></i></div>
           <div class="window" role="img" aria-label="Screenshot of the Atelio app showing a moodboard for a living room project">
             <div class="window-bar">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
@@ -164,54 +239,6 @@
               </div>
             </div>
           </div>
-          <div class="float float-approve" aria-hidden="true">
-            <span class="float-ic">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>
-            </span>
-            <span><strong>Living room approved</strong><br />Sarah M. · just now</span>
-          </div>
-          <div class="float float-invoice" aria-hidden="true">
-            <span><strong>Invoice #142 — paid</strong><br />$4,820.00 · Apple&nbsp;Pay</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Logos -->
-    <section class="logos">
-      <div class="container">
-        <p class="logos-label reveal">Trusted by 12,000+ studios and independent designers</p>
-        <div class="logos-row reveal" style="--d:100ms" aria-label="Customer logos">
-          <span class="logo-name">NORD&nbsp;STUDIO</span>
-          <span class="logo-name">Casa&nbsp;Norte</span>
-          <span class="logo-name">FORM+FIELD</span>
-          <span class="logo-name">Maison&nbsp;Verde</span>
-          <span class="logo-name">Studio&nbsp;Lindholm</span>
-          <span class="logo-name">ELM&nbsp;Interiors</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat reveal">
-            <span class="stat-num"><span class="count" data-target="12400" data-suffix="+">0</span></span>
-            <span class="stat-label">studios run on Atelio</span>
-          </div>
-          <div class="stat reveal" style="--d:80ms">
-            <span class="stat-num"><span class="count" data-target="38" data-suffix="%">0</span></span>
-            <span class="stat-label">faster client approvals</span>
-          </div>
-          <div class="stat reveal" style="--d:160ms">
-            <span class="stat-num"><span class="count" data-target="480" data-prefix="$" data-suffix="M">0</span></span>
-            <span class="stat-label">in projects managed yearly</span>
-          </div>
-          <div class="stat reveal" style="--d:240ms">
-            <span class="stat-num"><span class="count" data-target="11" data-suffix="&nbsp;hrs">0</span></span>
-            <span class="stat-label">saved per designer, weekly</span>
-          </div>
         </div>
       </div>
     </section>
@@ -219,12 +246,6 @@
     <!-- Features -->
     <section class="features" id="features">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">The platform</p>
-          <h2>Everything between<br />hello and handover.</h2>
-          <p class="lead">One subscription replaces the six tools your studio duct-tapes together today.</p>
-        </div>
-
         <!-- Showcase: Moodboards -->
         <div class="show-row reveal">
           <div class="show-text">
@@ -405,10 +426,36 @@
       </div>
     </section>
 
+    <!-- Statement + stats -->
+    <section class="statement">
+      <div class="container">
+        <h2 class="reveal">Software should feel like a well-designed room.</h2>
+        <p class="statement-sub reveal" style="--d:80ms">Nothing extra. Everything in its place. Atelio is the quiet system behind thousands of studios.</p>
+        <div class="stats-grid">
+          <div class="stat reveal">
+            <span class="stat-num"><span class="count" data-target="12400" data-suffix="+">0</span></span>
+            <span class="stat-label">studios run on Atelio</span>
+          </div>
+          <div class="stat reveal" style="--d:80ms">
+            <span class="stat-num"><span class="count" data-target="38" data-suffix="%">0</span></span>
+            <span class="stat-label">faster client approvals</span>
+          </div>
+          <div class="stat reveal" style="--d:160ms">
+            <span class="stat-num"><span class="count" data-target="480" data-prefix="$" data-suffix="M">0</span></span>
+            <span class="stat-label">in projects managed yearly</span>
+          </div>
+          <div class="stat reveal" style="--d:240ms">
+            <span class="stat-num"><span class="count" data-target="11" data-suffix="&nbsp;hrs">0</span></span>
+            <span class="stat-label">saved per designer, weekly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- How it works -->
     <section class="how" id="how">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head head-left reveal">
           <p class="eyebrow">How it works</p>
           <h2>Up and running<br />in an afternoon.</h2>
         </div>
@@ -435,10 +482,11 @@
     <!-- Testimonials -->
     <section class="quotes" id="stories">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">From the studios</p>
-          <h2>Designers run better<br />businesses on Atelio.</h2>
-        </div>
+        <figure class="quote-hero reveal">
+          <span class="quote-metric">Paid for itself in month one</span>
+          <blockquote>“One invoice that would have slipped through the cracks got auto-chased and paid. That alone covered Atelio for the year.”</blockquote>
+          <figcaption>Daniel Reyes — Principal, Casa Norte, Austin</figcaption>
+        </figure>
         <div class="quotes-grid">
           <figure class="quote-card reveal">
             <span class="quote-metric">2 weeks → 2 days</span>
@@ -449,14 +497,6 @@
             </figcaption>
           </figure>
           <figure class="quote-card reveal" style="--d:100ms">
-            <span class="quote-metric">Paid for itself in month one</span>
-            <blockquote>“One invoice that would have slipped through the cracks got auto-chased and paid. That alone covered Atelio for the year.”</blockquote>
-            <figcaption>
-              <span class="av av-2" aria-hidden="true">DR</span>
-              <span><strong>Daniel Reyes</strong><br />Principal, Casa Norte — Austin</span>
-            </figcaption>
-          </figure>
-          <figure class="quote-card reveal" style="--d:200ms">
             <span class="quote-metric">40-email threads → one link</span>
             <blockquote>“Clients approve rooms in the app instead of marathon email threads. It changed the way our studio feels to work in.”</blockquote>
             <figcaption>
@@ -505,7 +545,7 @@
             <p class="plan-for">For growing teams</p>
             <p class="plan-price"><span class="amount" data-m="79" data-a="63">$63</span><span class="per">/mo</span></p>
             <p class="plan-billed" data-m="billed monthly" data-a="billed annually">billed annually</p>
-            <a class="btn btn-primary btn-block" href="#pricing">Start free trial</a>
+            <a class="btn btn-light btn-block" href="#pricing">Start free trial</a>
             <ul class="plan-list">
               <li><strong>Everything in Solo, plus:</strong></li>
               <li>5 seats included</li>
@@ -612,7 +652,7 @@
       <div class="container">
         <h2 class="reveal">Your next project deserves<br />a better back office.</h2>
         <p class="reveal" style="--d:80ms">Join 12,000+ studios that swapped the spreadsheet shuffle for one calm workspace.</p>
-        <div class="hero-ctas reveal" style="--d:160ms">
+        <div class="hero-ctas cta-ctas reveal" style="--d:160ms">
           <a class="btn btn-light btn-lg" href="#pricing">Start free trial</a>
           <a class="btn btn-outline btn-lg" href="#pricing">Talk to sales</a>
         </div>
@@ -665,6 +705,7 @@
         <p>© <span id="year">2026</span> Atelio, Inc. All rights reserved.</p>
         <p>Designed with restraint.</p>
       </div>
+      <div class="foot-mark" aria-hidden="true">Atelio</div>
     </div>
   </footer>
 

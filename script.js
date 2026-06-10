@@ -91,6 +91,20 @@
     counters.forEach((el) => cio.observe(el));
   }
 
+  /* ---------- Hero room palette switcher ---------- */
+  const room = document.getElementById("room");
+  const palButtons = document.querySelectorAll(".pal-btn");
+  palButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      room.dataset.palette = btn.dataset.palette;
+      palButtons.forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-pressed", String(on));
+      });
+    });
+  });
+
   /* ---------- Pricing toggle ---------- */
   const btnMonthly = document.getElementById("btnMonthly");
   const btnAnnual = document.getElementById("btnAnnual");

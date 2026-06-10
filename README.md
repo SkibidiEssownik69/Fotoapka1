@@ -31,9 +31,13 @@ Netlify, Vercel, or any static host.
 - **Palette:** warm off-whites and charcoal with a single deep pine-green
   accent (`--accent: #2e5e4e`). No purple, no orange. All tokens live in
   `:root` in `styles.css` for easy retheming.
+- **Signature moment:** the hero contains an interactive CSS-illustrated room
+  that recolors when you pick a material palette — a 3-second demo of what the
+  product does. Architect-style dimension lines and annotations replace the
+  usual floating-notification clichés.
 - **Conversion structure:** hero with risk-reversal microcopy → social proof →
-  stats → benefit-led feature showcases → how-it-works → testimonials with
-  concrete results → pricing (annual default, highlighted plan, guarantee) →
-  objection-handling FAQ → final CTA.
+  product workspace → benefit-led feature showcases → statement section with
+  stats → how-it-works → editorial testimonials → pricing (annual default,
+  dark featured plan, guarantee) → objection-handling FAQ → final CTA.
 - **Accessibility:** semantic landmarks, skip link, ARIA on the menu/accordion/
   toggle, visible focus states, `prefers-reduced-motion` support.
