@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelio — The studio platform for interior designers</title>
+  <meta name="description" content="Atelio brings moodboards, floor plans, sourcing, client approvals, and invoicing into one calm workspace. Free 14-day trial, no credit card." />
+  <meta property="og:title" content="Atelio — Interior design, minus the admin" />
+  <meta property="og:description" content="Moodboards, floor plans, approvals, and invoicing in one workspace. Trusted by 12,000+ design studios." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232E5E4E'/%3E%3Cpath d='M10 22l6-12 6 12' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+  <style>
+/* ============================================================
+   Atelio — marketing site
+   Palette: warm neutrals + deep pine green. No purple, no orange.
+   Type: native system stack (SF Pro on Apple devices).
+   ============================================================ */
+
+:root {
+  --bg: #fbfaf8;
+  --bg-alt: #f4f2ee;
+  --ink: #1d1d1f;
+  --ink-2: #6e6e73;
+  --ink-3: #a1a1a6;
+  --line: rgba(29, 29, 31, 0.09);
+  --accent: #2e5e4e;
+  --accent-dark: #234c3f;
+  --accent-deep: #1f4237;
+  --accent-tint: #e8efeb;
+  --accent-soft: #9cc2b2;
+  --sand: #e9e3d8;
+  --dark: #141413;
+  --dark-card: #1f1f1e;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --pill: 980px;
+  --shadow-sm: 0 1px 2px rgba(29, 29, 31, 0.06), 0 4px 12px rgba(29, 29, 31, 0.05);
+  --shadow-lg: 0 24px 70px -18px rgba(29, 29, 31, 0.28);
+  --navh: 58px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Helvetica Neue", "Segoe UI", Inter, Roboto, Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--navh) + 18px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--accent-tint); color: var(--accent-deep); }
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.container {
+  width: min(1160px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+.container-narrow { width: min(780px, 100% - 3rem); }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 200;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--pill);
+  font-size: 0.9rem;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Type ---------- */
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.9rem, 7.2vw, 5.3rem);
+  letter-spacing: -0.028em;
+  line-height: 1.02;
+}
+
+h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
+
+.eyebrow {
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+
+.lead {
+  font-size: clamp(1.08rem, 1.7vw, 1.32rem);
+  color: var(--ink-2);
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(3.5rem, 7vw, 5.5rem);
+}
+.section-head .lead { margin-top: 1.2rem; }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 0.78rem 1.6rem;
+  border-radius: var(--pill);
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(46, 94, 78, 0.6); }
+
+.btn-ghost { background: rgba(29, 29, 31, 0.06); color: var(--ink); }
+.btn-ghost:hover { background: rgba(29, 29, 31, 0.1); }
+
+.btn-light { background: #fff; color: var(--ink); }
+.btn-light:hover { background: #f0efeb; transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.45);
+}
+.btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+
+.btn-sm { padding: 0.52rem 1.15rem; font-size: 0.9rem; }
+.btn-lg { padding: 0.95rem 2rem; font-size: 1.08rem; }
+.btn-block { width: 100%; }
+
+/* ---------- Banner ---------- */
+
+.banner {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: 0.55rem 1rem;
+  font-size: 0.88rem;
+}
+.banner a {
+  color: #fff;
+  font-weight: 600;
+  margin-left: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+.banner a:hover { border-bottom-color: #fff; }
+
+/* ---------- Nav ---------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--navh);
+  background: rgba(251, 250, 248, 0.78);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.nav.scrolled {
+  border-bottom-color: var(--line);
+  background: rgba(251, 250, 248, 0.88);
+}
+
+.nav-inner {
+  width: min(1160px, 100% - 3rem);
+  margin-inline: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nav-links { display: flex; gap: 1.9rem; }
+.nav-links a {
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta { display: flex; align-items: center; gap: 1.1rem; }
+.nav-login { font-size: 0.92rem; color: var(--ink-2); transition: color 0.2s ease; }
+.nav-login:hover { color: var(--ink); }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+}
+.nav-burger span {
+  display: block;
+  width: 20px;
+  height: 1.8px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-burger.open span:first-child { transform: translateY(3.9px) rotate(45deg); }
+.nav-burger.open span:last-child { transform: translateY(-3.9px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed;
+  inset: var(--navh) 0 auto 0;
+  z-index: 99;
+  background: rgba(251, 250, 248, 0.97);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--line);
+  padding: 1rem 1.5rem 1.8rem;
+}
+.mobile-menu nav { display: flex; flex-direction: column; }
+.mobile-menu nav a {
+  padding: 0.85rem 0.2rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+}
+.mobile-menu-cta { margin-top: 1.4rem; display: grid; gap: 0.9rem; justify-items: center; }
+.mobile-login { color: var(--ink-2); font-size: 0.95rem; }
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding: clamp(4rem, 9vw, 7rem) 0 0;
+  text-align: center;
+}
+
+.hero-sub {
+  max-width: 640px;
+  margin: 1.6rem auto 0;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--ink-2);
+  text-wrap: balance;
+}
+
+.hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 2.4rem;
+  flex-wrap: wrap;
+}
+
+.hero-note {
+  margin-top: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--ink-3);
+}
+
+.hero-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 2.6rem;
+  flex-wrap: wrap;
+}
+
+.avatars { display: flex; }
+.av {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  border: 2px solid var(--bg);
+  flex: none;
+}
+.avatars .av + .av { margin-left: -9px; }
+.av-1 { background: #2e5e4e; }
+.av-2 { background: #1d1d1f; }
+.av-3 { background: #7d8d80; }
+.av-4 { background: #b3a78f; }
+.avatars-sm .av { width: 24px; height: 24px; font-size: 0.52rem; border-color: #fff; }
+
+.proof-text {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+.proof-text strong { color: var(--ink); }
+.stars { display: inline-flex; gap: 2px; }
+.stars svg { width: 14px; height: 14px; fill: var(--ink); }
+
+/* ---------- Hero mockup ---------- */
+
+.hero-visual {
+  position: relative;
+  max-width: 1020px;
+  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+}
+
+.window {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  text-align: left;
+}
+
+.window-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.8rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; background: #e3e1dc; }
+.addr {
+  margin-left: 1rem;
+  font-size: 0.74rem;
+  color: var(--ink-3);
+  background: var(--bg-alt);
+  padding: 0.28rem 0.9rem;
+  border-radius: var(--pill);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 212px 1fr;
+  min-height: 460px;
+}
+
+.app-side {
+  border-right: 1px solid var(--line);
+  padding: 1.2rem 1rem;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  font-size: 0.84rem;
+}
+.side-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.92rem; }
+.side-nav { display: flex; flex-direction: column; gap: 2px; }
+.side-item {
+  padding: 0.42rem 0.7rem;
+  border-radius: 9px;
+  color: var(--ink-2);
+}
+.side-item.active { background: var(--accent-tint); color: var(--accent-deep); font-weight: 600; }
+.side-projects { display: flex; flex-direction: column; gap: 2px; }
+.side-label {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0 0.7rem 0.4rem;
+}
+.proj {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.7rem;
+  color: var(--ink-2);
+  border-radius: 9px;
+}
+.proj:first-of-type { color: var(--ink); font-weight: 600; }
+.st { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.st-green { background: var(--accent); }
+.st-sand { background: #c6b89a; }
+.st-gray { background: #c9c9cd; }
+
+.app-main { padding: 1.3rem 1.5rem 1.6rem; background: #fff; }
+.main-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.main-title { display: block; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.015em; }
+.main-sub { display: block; font-size: 0.78rem; color: var(--ink-3); margin-top: 2px; }
+.main-actions { display: flex; align-items: center; gap: 0.8rem; }
+.share-btn {
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: var(--pill);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+.tile {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  min-height: 138px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  background: #fff;
+}
+.tile-cap { font-size: 0.72rem; color: var(--ink-2); }
+
+.t-img1 {
+  background:
+    radial-gradient(120% 90% at 20% 10%, rgba(255, 255, 255, 0.5), transparent 50%),
+    linear-gradient(155deg, #e8e2d6 0%, #d8d0bf 55%, #c9c0ac 100%);
+  border: none;
+}
+.t-img2 {
+  background:
+    radial-gradient(110% 80% at 80% 15%, rgba(255, 255, 255, 0.45), transparent 55%),
+    linear-gradient(150deg, #cdd8cf 0%, #a9bcab 60%, #8da692 100%);
+  border: none;
+}
+.t-swatch { flex-direction: row; gap: 0.5rem; }
+.chip { width: 26px; height: 26px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.08); }
+.c-1 { background: #2e5e4e; }
+.c-2 { background: #9fb4a2; }
+.c-3 { background: #ddd5c4; }
+.c-4 { background: #2a2a2c; }
+
+.t-sofa { color: var(--ink-2); }
+.t-sofa svg { width: 86px; }
+
+.t-plan { background: var(--accent-tint); border: none; color: var(--accent); }
+.t-plan svg { width: 96px; }
+.t-plan .tile-cap { color: var(--accent-deep); }
+
+.t-note { align-items: flex-start; text-align: left; gap: 0.4rem; }
+.note-name { font-size: 0.74rem; font-weight: 700; }
+.note-name em {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.62rem;
+  color: var(--accent-deep);
+  background: var(--accent-tint);
+  border-radius: var(--pill);
+  padding: 0.1rem 0.5rem;
+  margin-left: 0.3rem;
+}
+.note-text { font-size: 0.8rem; color: var(--ink-2); line-height: 1.45; }
+
+/* Floating cards */
+
+.float {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.8rem 1.1rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  text-align: left;
+}
+.float strong { color: var(--ink); font-size: 0.84rem; }
+.float-ic {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.float-ic svg { width: 14px; height: 14px; }
+
+.float-approve { top: 14%; right: -3.5rem; animation: floaty 7s ease-in-out infinite; }
+.float-invoice { bottom: 10%; left: -3.5rem; animation: floaty 8s ease-in-out 1.2s infinite; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+/* ---------- Logos ---------- */
+
+.logos { padding: clamp(3.5rem, 7vw, 5.5rem) 0; }
+.logos-label {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--ink-3);
+  margin-bottom: 1.8rem;
+}
+.logos-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1.4rem 3.2rem;
+}
+.logo-name {
+  color: var(--ink-3);
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+}
+.logo-name:nth-child(odd) { letter-spacing: 0.14em; font-size: 0.88rem; }
+
+/* ---------- Stats ---------- */
+
+.stats { border-block: 1px solid var(--line); padding: clamp(3rem, 6vw, 4.5rem) 0; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+.stat-num {
+  display: block;
+  font-size: clamp(2.1rem, 3.6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.stat-label { display: block; margin-top: 0.4rem; font-size: 0.92rem; color: var(--ink-2); }
+
+/* ---------- Features / showcases ---------- */
+
+.features { padding: clamp(5rem, 10vw, 8.5rem) 0; }
+
+.show-row {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+}
+.show-row + .show-row { margin-top: clamp(4.5rem, 9vw, 7.5rem); }
+.show-row.rev .show-text { order: 2; }
+.show-row.rev .show-visual { order: 1; }
+
+.show-text h3 { font-size: clamp(1.65rem, 2.8vw, 2.25rem); margin-bottom: 1rem; }
+.show-text > p { color: var(--ink-2); font-size: 1.06rem; max-width: 46ch; }
+
+.show-bullets { list-style: none; margin-top: 1.6rem; display: grid; gap: 0.8rem; }
+.show-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+.show-bullets svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+  flex: none;
+  background: var(--accent-tint);
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.panel {
+  background: var(--bg-alt);
+  border-radius: 24px;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* board panel */
+.panel-board { gap: 1rem; }
+.pb-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+.pb-tile { aspect-ratio: 1 / 1.15; border-radius: 14px; }
+.pb-linen { background: linear-gradient(160deg, #efe9dd, #ddd3c0); }
+.pb-oak { background: linear-gradient(160deg, #d6c4a8, #b8a182); }
+.pb-stone { background: linear-gradient(160deg, #dddcd8, #bdbcb6); }
+.pb-sage { background: linear-gradient(160deg, #c2d0c3, #93ab97); }
+.pb-palette {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.75rem 1.1rem;
+  box-shadow: var(--shadow-sm);
+  width: fit-content;
+}
+.pb-palette .chip { width: 22px; height: 22px; }
+.pb-palette-label { font-size: 0.74rem; color: var(--ink-3); margin-left: 0.4rem; }
+.pb-comment {
+  position: absolute;
+  right: clamp(0.6rem, 2vw, 1.6rem);
+  bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #fff;
+  border-radius: var(--pill);
+  padding: 0.5rem 1.1rem 0.5rem 0.5rem;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+/* plan panel */
+.panel-plan { background: var(--accent-tint); color: var(--accent); align-items: center; }
+.panel-plan svg { width: 100%; max-width: 380px; }
+.plan-label {
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  fill: var(--accent);
+}
+.plan-dim { font-family: var(--font); font-size: 10px; fill: var(--accent); letter-spacing: 0.06em; }
+.panel-badge {
+  position: absolute;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  background: #fff;
+  color: var(--accent-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: var(--pill);
+  box-shadow: var(--shadow-sm);
+}
+
+/* approvals panel */
+.panel-approve { gap: 0.8rem; }
+.ap-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.95rem 1.2rem;
+  box-shadow: var(--shadow-sm);
+}
+.ap-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.ap-title { font-weight: 600; font-size: 0.94rem; }
+.ap-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.22rem 0.7rem;
+  border-radius: var(--pill);
+  white-space: nowrap;
+}
+.ap-status.ok { background: var(--accent-tint); color: var(--accent-deep); }
+.ap-status.wait { background: var(--sand); color: #6d6353; }
+.ap-meta { display: block; font-size: 0.78rem; color: var(--ink-3); margin-top: 0.25rem; }
+.ap-sign {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.4rem 0;
+}
+.ap-sign svg { width: 110px; color: var(--ink); }
+
+/* invoice panel */
+.panel-invoice { align-items: center; }
+.inv {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.5rem 1.6rem;
+  width: min(360px, 100%);
+  box-shadow: var(--shadow-sm);
+}
+.inv-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.9rem;
+}
+.inv-no { font-weight: 700; letter-spacing: -0.015em; }
+.inv-due { font-size: 0.76rem; color: var(--ink-3); }
+.inv-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.86rem;
+  color: var(--ink-2);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.inv-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  padding: 0.8rem 0 1.1rem;
+  font-size: 1rem;
+}
+.inv-pay {
+  display: block;
+  text-align: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.65rem;
+  border-radius: var(--pill);
+}
+.inv-toast {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  right: clamp(0.6rem, 2vw, 1.8rem);
+  bottom: 1.6rem;
+  background: #fff;
+  border-radius: var(--pill);
+  box-shadow: var(--shadow-lg);
+  padding: 0.55rem 1.1rem 0.55rem 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.inv-toast .float-ic { width: 24px; height: 24px; }
+.inv-toast .float-ic svg { width: 12px; height: 12px; }
+
+/* ---------- More grid ---------- */
+
+.more { margin-top: clamp(5rem, 9vw, 7.5rem); }
+.more-title {
+  text-align: center;
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.6rem;
+}
+.more-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+.more-card {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  padding: 1.8rem 1.7rem;
+}
+.more-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.1rem;
+}
+.more-icon svg { width: 21px; height: 21px; }
+.more-card h4 { font-size: 1.02rem; margin-bottom: 0.4rem; }
+.more-card p { font-size: 0.9rem; color: var(--ink-2); line-height: 1.55; }
+
+/* ---------- How it works ---------- */
+
+.how { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) 0; }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+.step {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem 1.9rem;
+}
+.step-num {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  background: var(--accent-tint);
+  border-radius: var(--pill);
+  padding: 0.3rem 0.85rem;
+  margin-bottom: 1.3rem;
+}
+.step h3 { font-size: 1.22rem; margin-bottom: 0.55rem; }
+.step p { font-size: 0.94rem; color: var(--ink-2); line-height: 1.6; }
+
+/* ---------- Testimonials ---------- */
+
+.quotes {
+  background: var(--dark);
+  color: #fff;
+  padding: clamp(5rem, 10vw, 8.5rem) 0;
+}
+.quotes .eyebrow { color: var(--accent-soft); }
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+.quote-card {
+  background: var(--dark-card);
+  border-radius: var(--radius);
+  padding: 2rem 1.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.quote-metric {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+}
+.quote-card blockquote {
+  font-size: 1.06rem;
+  line-height: 1.55;
+  color: #d8d8d5;
+  letter-spacing: -0.005em;
+  flex: 1;
+}
+.quote-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: #97978f;
+}
+.quote-card figcaption strong { color: #fff; font-size: 0.92rem; }
+.quote-card .av { border-color: var(--dark-card); }
+
+/* ---------- Pricing ---------- */
+
+.pricing { padding: clamp(5rem, 10vw, 8.5rem) 0; }
+
+.toggle {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto 3rem;
+  background: var(--bg-alt);
+  border-radius: var(--pill);
+  padding: 4px;
+  gap: 2px;
+}
+.toggle-btn {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  padding: 0.55rem 1.4rem;
+  border-radius: var(--pill);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+.toggle-btn.active { background: #fff; color: var(--ink); box-shadow: var(--shadow-sm); }
+.toggle-btn .save { color: var(--accent); font-weight: 700; margin-left: 0.25rem; }
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  align-items: stretch;
+}
+.plan {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 2.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.plan.featured {
+  border: 1.5px solid var(--accent);
+  box-shadow: var(--shadow-lg);
+}
+.badge-pop {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.32rem 1rem;
+  border-radius: var(--pill);
+  white-space: nowrap;
+}
+.plan-name { font-size: 1.3rem; }
+.plan-for { font-size: 0.9rem; color: var(--ink-2); margin-top: 0.25rem; }
+.plan-price { margin-top: 1.5rem; display: flex; align-items: baseline; gap: 0.25rem; }
+.plan-price .amount {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.plan-price .per { color: var(--ink-2); font-size: 1rem; }
+.plan-billed { font-size: 0.82rem; color: var(--ink-3); margin: 0.35rem 0 1.5rem; }
+.plan .btn { margin-bottom: 1.7rem; }
+.plan-list { list-style: none; display: grid; gap: 0.7rem; font-size: 0.93rem; color: var(--ink-2); }
+.plan-list li { display: flex; gap: 0.6rem; align-items: baseline; }
+.plan-list li::before {
+  content: "✓";
+  color: var(--accent);
+  font-weight: 700;
+  flex: none;
+}
+.plan-list li strong { color: var(--ink); }
+.plan-list li:has(strong)::before { content: ""; display: none; }
+
+.guarantee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  max-width: 640px;
+  margin: 3rem auto 0;
+  text-align: left;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.guarantee svg { width: 30px; height: 30px; color: var(--accent); flex: none; }
+
+/* ---------- FAQ ---------- */
+
+.faq { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) 0; }
+.faq-list { display: grid; gap: 0.8rem; }
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.04rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  padding: 1.25rem 1.5rem;
+}
+.faq-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--ink-2);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+.faq-icon::before { width: 14px; height: 1.8px; }
+.faq-icon::after { width: 1.8px; height: 14px; }
+.faq-item.open .faq-icon::after { transform: rotate(90deg); }
+.faq-item.open .faq-icon::before { transform: rotate(180deg); }
+.faq-a { padding: 0 1.5rem 1.3rem; }
+.faq-a p { color: var(--ink-2); font-size: 0.97rem; max-width: 62ch; }
+.faq-item.open .faq-a { animation: faqIn 0.35s ease; }
+
+@keyframes faqIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Final CTA ---------- */
+
+.cta-final {
+  background: linear-gradient(180deg, var(--accent-deep), #16322a);
+  color: #fff;
+  text-align: center;
+  padding: clamp(5.5rem, 11vw, 9rem) 0;
+}
+.cta-final h2 { color: #fff; }
+.cta-final > .container > p {
+  margin: 1.3rem auto 0;
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.12rem;
+  line-height: 1.5;
+}
+.cta-note { font-size: 0.88rem !important; color: rgba(255, 255, 255, 0.5) !important; margin-top: 1.2rem !important; }
+
+/* ---------- Footer ---------- */
+
+.footer { padding: clamp(3.5rem, 7vw, 5.5rem) 0 2.5rem; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+}
+.foot-brand p { margin-top: 1rem; font-size: 0.92rem; color: var(--ink-2); max-width: 24ch; }
+.foot-col { display: flex; flex-direction: column; }
+.foot-col h4 { font-size: 0.86rem; margin-bottom: 1rem; }
+.foot-col a {
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  padding: 0.32rem 0;
+  transition: color 0.2s ease;
+}
+.foot-col a:hover { color: var(--ink); }
+.foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  font-size: 0.84rem;
+  color: var(--ink-3);
+}
+
+/* ---------- Reveal animations ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition-delay: var(--d, 0ms);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .float-approve, .float-invoice { animation: none; }
+  .faq-item.open .faq-a { animation: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+  .more-grid { grid-template-columns: repeat(2, 1fr); }
+  .float-approve { right: -0.5rem; }
+  .float-invoice { left: -0.5rem; }
+}
+
+@media (max-width: 880px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+
+  .show-row,
+  .show-row.rev { grid-template-columns: 1fr; }
+  .show-row.rev .show-text { order: 1; }
+  .show-row.rev .show-visual { order: 2; }
+
+  .app { grid-template-columns: 1fr; min-height: 0; }
+  .app-side { display: none; }
+  .board { grid-template-columns: repeat(2, 1fr); }
+  .t-img2 { display: none; }
+
+  .float-approve { top: -1.4rem; right: 0.4rem; }
+  .float-invoice { bottom: -1.2rem; left: 0.4rem; }
+
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps, .quotes-grid { grid-template-columns: 1fr; }
+
+  .plans { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; }
+  .plan.featured { order: -1; }
+
+  .foot-grid { grid-template-columns: repeat(2, 1fr); }
+  .foot-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { width: 100%; }
+  .more-grid { grid-template-columns: 1fr; }
+  .pb-grid { grid-template-columns: repeat(2, 1fr); }
+  .pb-tile { aspect-ratio: 1 / 0.72; }
+  .banner { font-size: 0.8rem; }
+  .guarantee { flex-direction: column; text-align: center; }
+}
+
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Announcement -->
+  <div class="banner" role="region" aria-label="Announcement">
+    <p>New — AI moodboards are now included in every plan. <a href="#features">See what's new</a></p>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#top" aria-label="Atelio home">
+        <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M10 22l6-12 6 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <span>Atelio</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#stories">Stories</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="nav-login" href="#pricing">Log in</a>
+        <a class="btn btn-primary btn-sm" href="#pricing">Start free trial</a>
+      </div>
+      <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav aria-label="Mobile">
+      <a href="#features">Product</a>
+      <a href="#how">How it works</a>
+      <a href="#stories">Stories</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="mobile-menu-cta">
+      <a class="btn btn-primary btn-block" href="#pricing">Start free trial</a>
+      <a class="mobile-login" href="#pricing">Log in</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="container">
+        <h1 class="reveal">Interior design,<br />minus the admin.</h1>
+        <p class="hero-sub reveal" style="--d:80ms">Atelio brings moodboards, floor plans, sourcing, client approvals, and invoicing into one calm workspace — so your hours go into rooms, not spreadsheets.</p>
+        <div class="hero-ctas reveal" style="--d:160ms">
+          <a class="btn btn-primary btn-lg" href="#pricing">Start free trial</a>
+          <a class="btn btn-ghost btn-lg" href="#features">See it in action</a>
+        </div>
+        <p class="hero-note reveal" style="--d:220ms">Free for 14 days · No credit card · Cancel anytime</p>
+        <div class="hero-proof reveal" style="--d:280ms">
+          <div class="avatars" aria-hidden="true">
+            <span class="av av-1">ML</span>
+            <span class="av av-2">DR</span>
+            <span class="av av-3">AH</span>
+            <span class="av av-4">JK</span>
+          </div>
+          <div class="proof-text">
+            <span class="stars" aria-label="Rated 4.9 out of 5">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L10 14.3l-5.1 2.8 1.1-5.6L1.8 7.6l5.7-.7z"/></svg>
+            </span>
+            <span><strong>4.9/5</strong> from 2,400+ studios</span>
+          </div>
+        </div>
+
+        <!-- Product mockup -->
+        <div class="hero-visual reveal" style="--d:340ms">
+          <div class="window" role="img" aria-label="Screenshot of the Atelio app showing a moodboard for a living room project">
+            <div class="window-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="addr">atelio.app/projects/loft-on-greene</span>
+            </div>
+            <div class="app">
+              <aside class="app-side">
+                <div class="side-brand">
+                  <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M10 22l6-12 6 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                  <span>Atelio</span>
+                </div>
+                <div class="side-nav">
+                  <span class="side-item active">Projects</span>
+                  <span class="side-item">Boards</span>
+                  <span class="side-item">Sourcing</span>
+                  <span class="side-item">Invoices</span>
+                  <span class="side-item">Clients</span>
+                </div>
+                <div class="side-projects">
+                  <span class="side-label">Active</span>
+                  <span class="proj"><i class="st st-green"></i>Loft on Greene</span>
+                  <span class="proj"><i class="st st-sand"></i>Casa Mirador</span>
+                  <span class="proj"><i class="st st-gray"></i>Hudson Penthouse</span>
+                </div>
+              </aside>
+              <div class="app-main">
+                <div class="main-bar">
+                  <div>
+                    <span class="main-title">Loft on Greene</span>
+                    <span class="main-sub">Living room · Concept board v3</span>
+                  </div>
+                  <div class="main-actions">
+                    <div class="avatars avatars-sm" aria-hidden="true">
+                      <span class="av av-2">SM</span>
+                      <span class="av av-3">JK</span>
+                    </div>
+                    <span class="share-btn">Share</span>
+                  </div>
+                </div>
+                <div class="board">
+                  <div class="tile t-img1"></div>
+                  <div class="tile t-swatch">
+                    <span class="chip c-1"></span>
+                    <span class="chip c-2"></span>
+                    <span class="chip c-3"></span>
+                    <span class="chip c-4"></span>
+                  </div>
+                  <div class="tile t-sofa">
+                    <svg viewBox="0 0 120 70" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M18 38V26a8 8 0 018-8h68a8 8 0 018 8v12"/>
+                      <path d="M10 38a6 6 0 016 6v6h88v-6a6 6 0 0112 0v10a6 6 0 01-6 6H10a6 6 0 01-6-6V44a6 6 0 016-6z" transform="translate(0 -4)"/>
+                      <path d="M16 58v6M104 58v6"/>
+                    </svg>
+                    <span class="tile-cap">Bouclé sofa · $2,480</span>
+                  </div>
+                  <div class="tile t-plan">
+                    <svg viewBox="0 0 140 100" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <rect x="8" y="8" width="124" height="84" rx="2"/>
+                      <path d="M8 56h52M60 56v36M88 8v30M88 38h44"/>
+                      <path d="M34 56h14" stroke-dasharray="3 4"/>
+                      <circle cx="106" cy="68" r="9"/>
+                      <rect x="20" y="20" width="24" height="14" rx="1"/>
+                    </svg>
+                    <span class="tile-cap">Plan · 1:50</span>
+                  </div>
+                  <div class="tile t-img2"></div>
+                  <div class="tile t-note">
+                    <span class="note-name">Sarah M. <em>client</em></span>
+                    <span class="note-text">Love the oak + bouclé direction. Approved!</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="float float-approve" aria-hidden="true">
+            <span class="float-ic">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>
+            </span>
+            <span><strong>Living room approved</strong><br />Sarah M. · just now</span>
+          </div>
+          <div class="float float-invoice" aria-hidden="true">
+            <span><strong>Invoice #142 — paid</strong><br />$4,820.00 · Apple&nbsp;Pay</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logos -->
+    <section class="logos">
+      <div class="container">
+        <p class="logos-label reveal">Trusted by 12,000+ studios and independent designers</p>
+        <div class="logos-row reveal" style="--d:100ms" aria-label="Customer logos">
+          <span class="logo-name">NORD&nbsp;STUDIO</span>
+          <span class="logo-name">Casa&nbsp;Norte</span>
+          <span class="logo-name">FORM+FIELD</span>
+          <span class="logo-name">Maison&nbsp;Verde</span>
+          <span class="logo-name">Studio&nbsp;Lindholm</span>
+          <span class="logo-name">ELM&nbsp;Interiors</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat reveal">
+            <span class="stat-num"><span class="count" data-target="12400" data-suffix="+">0</span></span>
+            <span class="stat-label">studios run on Atelio</span>
+          </div>
+          <div class="stat reveal" style="--d:80ms">
+            <span class="stat-num"><span class="count" data-target="38" data-suffix="%">0</span></span>
+            <span class="stat-label">faster client approvals</span>
+          </div>
+          <div class="stat reveal" style="--d:160ms">
+            <span class="stat-num"><span class="count" data-target="480" data-prefix="$" data-suffix="M">0</span></span>
+            <span class="stat-label">in projects managed yearly</span>
+          </div>
+          <div class="stat reveal" style="--d:240ms">
+            <span class="stat-num"><span class="count" data-target="11" data-suffix="&nbsp;hrs">0</span></span>
+            <span class="stat-label">saved per designer, weekly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">The platform</p>
+          <h2>Everything between<br />hello and handover.</h2>
+          <p class="lead">One subscription replaces the six tools your studio duct-tapes together today.</p>
+        </div>
+
+        <!-- Showcase: Moodboards -->
+        <div class="show-row reveal">
+          <div class="show-text">
+            <p class="eyebrow">Moodboards</p>
+            <h3>Boards clients say yes to.</h3>
+            <p>Drag in products, fabrics, and palettes. Clients react and comment right on the board — no PDFs, no printouts, no guessing.</p>
+            <ul class="show-bullets">
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Real-time comments and reactions</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>AI palettes generated from any photo</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>One click from board to shopping list</li>
+            </ul>
+          </div>
+          <div class="show-visual">
+            <div class="panel panel-board" role="img" aria-label="A moodboard with material tiles and a colour palette">
+              <div class="pb-grid">
+                <div class="pb-tile pb-linen"></div>
+                <div class="pb-tile pb-oak"></div>
+                <div class="pb-tile pb-stone"></div>
+                <div class="pb-tile pb-sage"></div>
+              </div>
+              <div class="pb-palette">
+                <span class="chip c-1"></span><span class="chip c-2"></span><span class="chip c-3"></span><span class="chip c-4"></span>
+                <span class="pb-palette-label">Palette · auto</span>
+              </div>
+              <div class="pb-comment">
+                <span class="av av-2">SM</span>
+                <span>“Yes to all of this.”</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase: Floor plans -->
+        <div class="show-row rev reveal">
+          <div class="show-text">
+            <p class="eyebrow">Floor plans</p>
+            <h3>Precision plans,<br />no CAD degree.</h3>
+            <p>Draw to-scale floor plans in minutes and walk clients through them in 3D. Every wall, in millimetres or inches.</p>
+            <ul class="show-bullets">
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>2D drafting with smart snapping</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Instant 3D walkthrough view</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Furnish straight from your sourcing list</li>
+            </ul>
+          </div>
+          <div class="show-visual">
+            <div class="panel panel-plan" role="img" aria-label="A floor plan drawing with room labels and dimensions">
+              <svg viewBox="0 0 360 240" fill="none" aria-hidden="true">
+                <rect x="16" y="16" width="328" height="208" rx="3" stroke="currentColor" stroke-width="3"/>
+                <path d="M16 128h132M148 128v96M232 16v76M232 92h112" stroke="currentColor" stroke-width="3"/>
+                <path d="M66 128h36" stroke="currentColor" stroke-width="3" stroke-dasharray="4 6"/>
+                <rect x="36" y="36" width="64" height="34" rx="2" stroke="currentColor" stroke-width="2"/>
+                <circle cx="288" cy="160" r="22" stroke="currentColor" stroke-width="2"/>
+                <rect x="252" y="32" width="72" height="30" rx="2" stroke="currentColor" stroke-width="2"/>
+                <text x="58" y="170" class="plan-label">LIVING</text>
+                <text x="178" y="60" class="plan-label">KITCHEN</text>
+                <text x="262" y="206" class="plan-label">STUDY</text>
+                <path d="M16 236h328" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M16 230v12M344 230v12" stroke="currentColor" stroke-width="1.5"/>
+                <text x="162" y="234" class="plan-dim">8.4 m</text>
+              </svg>
+              <span class="panel-badge">3D view ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase: Approvals -->
+        <div class="show-row reveal">
+          <div class="show-text">
+            <p class="eyebrow">Client portal</p>
+            <h3>Every yes, in writing.</h3>
+            <p>Send rooms for approval with one link. Clients approve, request changes, or sign off — and it's all on the record.</p>
+            <ul class="show-bullets">
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>One-click approvals with e-signature</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Versions and full change history</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Clients never need an account</li>
+            </ul>
+          </div>
+          <div class="show-visual">
+            <div class="panel panel-approve" role="img" aria-label="Approval cards showing rooms approved by a client">
+              <div class="ap-card">
+                <div class="ap-row">
+                  <span class="ap-title">Living room · v3</span>
+                  <span class="ap-status ok">Approved</span>
+                </div>
+                <span class="ap-meta">Signed by Sarah M. · Mar 14, 2:40 PM</span>
+              </div>
+              <div class="ap-card">
+                <div class="ap-row">
+                  <span class="ap-title">Primary bedroom · v2</span>
+                  <span class="ap-status ok">Approved</span>
+                </div>
+                <span class="ap-meta">Signed by Sarah M. · Mar 14, 2:41 PM</span>
+              </div>
+              <div class="ap-card">
+                <div class="ap-row">
+                  <span class="ap-title">Kitchen · v4</span>
+                  <span class="ap-status wait">Changes requested</span>
+                </div>
+                <span class="ap-meta">“Could we see the island in oak?”</span>
+              </div>
+              <div class="ap-sign">
+                <svg viewBox="0 0 120 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 20c10-14 16-14 18-6s6 10 12 2 12-12 16-4-2 12 8 8 14-10 20-6 12 6 18 2"/></svg>
+                <span>e-signature on record</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase: Invoicing -->
+        <div class="show-row rev reveal">
+          <div class="show-text">
+            <p class="eyebrow">Invoicing</p>
+            <h3>Invoices that<br />chase themselves.</h3>
+            <p>Turn approved items into invoices in seconds. Automatic reminders, online payment, and markups handled quietly.</p>
+            <ul class="show-bullets">
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Automatic reminders until paid</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Cards, bank transfer, Apple&nbsp;Pay</li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Markup and trade pricing built in</li>
+            </ul>
+          </div>
+          <div class="show-visual">
+            <div class="panel panel-invoice" role="img" aria-label="An invoice with line items and a paid confirmation">
+              <div class="inv">
+                <div class="inv-head">
+                  <span class="inv-no">Invoice #142</span>
+                  <span class="inv-due">Due Mar 28</span>
+                </div>
+                <div class="inv-line"><span>Bouclé sofa — Greene Living</span><span>$2,480</span></div>
+                <div class="inv-line"><span>Oak side tables × 2</span><span>$1,140</span></div>
+                <div class="inv-line"><span>Design fee — March</span><span>$1,200</span></div>
+                <div class="inv-total"><span>Total</span><span>$4,820</span></div>
+                <span class="inv-pay">Pay invoice</span>
+              </div>
+              <div class="inv-toast">
+                <span class="float-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg></span>
+                <span>Paid in full · 2 days early</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Everything else grid -->
+        <div class="more">
+          <p class="more-title reveal">And the everything else, too.</p>
+          <div class="more-grid">
+            <div class="more-card reveal">
+              <span class="more-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h11M9 12h11M9 20h11M4 4h.01M4 12h.01M4 20h.01"/></svg></span>
+              <h4>Product clipper</h4>
+              <p>Save any product from any site to your library — price, image, and specs included.</p>
+            </div>
+            <div class="more-card reveal" style="--d:60ms">
+              <span class="more-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+              <h4>Time tracking</h4>
+              <p>Track hours per room and per client. Billable time lands on the invoice automatically.</p>
+            </div>
+            <div class="more-card reveal" style="--d:120ms">
+              <span class="more-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10M7 12h6M4 4h16v13H8l-4 4z"/></svg></span>
+              <h4>Purchase orders</h4>
+              <p>Issue POs to vendors, track lead times, and flag delays before clients ask.</p>
+            </div>
+            <div class="more-card reveal" style="--d:180ms">
+              <span class="more-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 10-8 0M5 21v-1a7 7 0 0114 0v1"/><circle cx="12" cy="7" r="4"/></svg></span>
+              <h4>Team roles</h4>
+              <p>Juniors draft, seniors approve, bookkeepers see only the numbers. Everyone in their lane.</p>
+            </div>
+            <div class="more-card reveal" style="--d:240ms">
+              <span class="more-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></span>
+              <h4>Templates</h4>
+              <p>Proposals, welcome packets, room checklists — start every project at step three.</p>
+            </div>
+            <div class="more-card reveal" style="--d:300ms">
+              <span class="more-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h8M12 8v8"/><circle cx="12" cy="12" r="9"/></svg></span>
+              <h4>40+ integrations</h4>
+              <p>QuickBooks, Xero, Google Calendar, Dropbox, and the rest of your stack.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>Up and running<br />in an afternoon.</h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Bring a project in</h3>
+            <p>Import from spreadsheets or other tools — or start from a template. Our concierge team migrates bigger studios for free.</p>
+          </div>
+          <div class="step reveal" style="--d:100ms">
+            <span class="step-num">02</span>
+            <h3>Design and source</h3>
+            <p>Boards, floor plans, and a two-million-product library, all in one canvas. Clip anything from anywhere on the web.</p>
+          </div>
+          <div class="step reveal" style="--d:200ms">
+            <span class="step-num">03</span>
+            <h3>Send, approve, get paid</h3>
+            <p>Clients approve rooms and pay invoices in the same link. You see every yes, every signature, every payment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="quotes" id="stories">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">From the studios</p>
+          <h2>Designers run better<br />businesses on Atelio.</h2>
+        </div>
+        <div class="quotes-grid">
+          <figure class="quote-card reveal">
+            <span class="quote-metric">2 weeks → 2 days</span>
+            <blockquote>“Our proposal turnaround used to be two weeks of PDFs and email tag. Now clients approve boards in days, sometimes hours.”</blockquote>
+            <figcaption>
+              <span class="av av-1" aria-hidden="true">ML</span>
+              <span><strong>Marta Lindqvist</strong><br />Founder, Studio Lindholm — Stockholm</span>
+            </figcaption>
+          </figure>
+          <figure class="quote-card reveal" style="--d:100ms">
+            <span class="quote-metric">Paid for itself in month one</span>
+            <blockquote>“One invoice that would have slipped through the cracks got auto-chased and paid. That alone covered Atelio for the year.”</blockquote>
+            <figcaption>
+              <span class="av av-2" aria-hidden="true">DR</span>
+              <span><strong>Daniel Reyes</strong><br />Principal, Casa Norte — Austin</span>
+            </figcaption>
+          </figure>
+          <figure class="quote-card reveal" style="--d:200ms">
+            <span class="quote-metric">40-email threads → one link</span>
+            <blockquote>“Clients approve rooms in the app instead of marathon email threads. It changed the way our studio feels to work in.”</blockquote>
+            <figcaption>
+              <span class="av av-3" aria-hidden="true">AH</span>
+              <span><strong>Amelia Hart</strong><br />Director, ELM Interiors — London</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Pricing</p>
+          <h2>Simple plans.<br />Serious returns.</h2>
+          <p class="lead">Start free. Upgrade when the studio grows. Downgrade or cancel anytime.</p>
+        </div>
+
+        <div class="toggle reveal" role="group" aria-label="Billing period">
+          <button class="toggle-btn" id="btnMonthly" aria-pressed="false">Monthly</button>
+          <button class="toggle-btn active" id="btnAnnual" aria-pressed="true">Annual <span class="save">−20%</span></button>
+        </div>
+
+        <div class="plans">
+          <div class="plan reveal">
+            <h3 class="plan-name">Solo</h3>
+            <p class="plan-for">For independent designers</p>
+            <p class="plan-price"><span class="amount" data-m="29" data-a="23">$23</span><span class="per">/mo</span></p>
+            <p class="plan-billed" data-m="billed monthly" data-a="billed annually">billed annually</p>
+            <a class="btn btn-ghost btn-block" href="#pricing">Start free trial</a>
+            <ul class="plan-list">
+              <li>1 designer seat</li>
+              <li>Unlimited projects &amp; clients</li>
+              <li>Moodboards &amp; floor plans</li>
+              <li>Client approvals &amp; e-signature</li>
+              <li>Invoicing &amp; online payments</li>
+              <li>Email support</li>
+            </ul>
+          </div>
+
+          <div class="plan featured reveal" style="--d:100ms">
+            <span class="badge-pop">Most popular</span>
+            <h3 class="plan-name">Studio</h3>
+            <p class="plan-for">For growing teams</p>
+            <p class="plan-price"><span class="amount" data-m="79" data-a="63">$63</span><span class="per">/mo</span></p>
+            <p class="plan-billed" data-m="billed monthly" data-a="billed annually">billed annually</p>
+            <a class="btn btn-primary btn-block" href="#pricing">Start free trial</a>
+            <ul class="plan-list">
+              <li><strong>Everything in Solo, plus:</strong></li>
+              <li>5 seats included</li>
+              <li>Sourcing library &amp; product clipper</li>
+              <li>Purchase orders &amp; markups</li>
+              <li>Time tracking</li>
+              <li>Branded client portal</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+
+          <div class="plan reveal" style="--d:200ms">
+            <h3 class="plan-name">Agency</h3>
+            <p class="plan-for">For established firms</p>
+            <p class="plan-price"><span class="amount" data-m="199" data-a="159">$159</span><span class="per">/mo</span></p>
+            <p class="plan-billed" data-m="billed monthly" data-a="billed annually">billed annually</p>
+            <a class="btn btn-ghost btn-block" href="#pricing">Start free trial</a>
+            <ul class="plan-list">
+              <li><strong>Everything in Studio, plus:</strong></li>
+              <li>Unlimited seats</li>
+              <li>SSO &amp; advanced permissions</li>
+              <li>Multi-studio workspaces</li>
+              <li>Concierge migration</li>
+              <li>Dedicated success manager</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="guarantee reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6z"/><path d="M9 12l2 2 4-4.5"/></svg>
+          Every plan starts with a free 14-day trial. No credit card up front, and a 30-day money-back guarantee if Atelio isn't a fit.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="container container-narrow">
+        <div class="section-head reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>Asked, answered.</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+              Do my clients need an account?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+              <p>No. Clients open boards, approve rooms, and pay invoices through a private link — no password, no app to install. You stay in control of what each link can see.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" style="--d:50ms">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+              Can I import my existing projects?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+              <p>Yes. Import from spreadsheets in minutes, or let our concierge team migrate your projects, contacts, and product library for you — free on Studio and Agency plans.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" style="--d:100ms">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+              Is there a contract or lock-in?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+              <p>No contracts. Plans are month-to-month (or annual if you prefer the discount), you can cancel in two clicks, and you can export every project, file, and invoice at any time.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" style="--d:150ms">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+              How does the free trial work?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+              <p>You get the full Studio plan for 14 days — every feature, no credit card. At the end, pick a plan or walk away; we'll keep your data for 90 days in case you come back.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" style="--d:200ms">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+              Do you take a cut of my markups or payments?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+              <p>Never. Your markup is your business — Atelio charges a flat subscription and nothing else. Online payments carry only the standard card-processing fee, which you can pass on.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" style="--d:250ms">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+              Is my client data secure?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
+              <p>Yes. Atelio is SOC 2 Type II certified, encrypts data in transit and at rest, and backs everything up continuously. Agency plans add SSO and granular audit logs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-final">
+      <div class="container">
+        <h2 class="reveal">Your next project deserves<br />a better back office.</h2>
+        <p class="reveal" style="--d:80ms">Join 12,000+ studios that swapped the spreadsheet shuffle for one calm workspace.</p>
+        <div class="hero-ctas reveal" style="--d:160ms">
+          <a class="btn btn-light btn-lg" href="#pricing">Start free trial</a>
+          <a class="btn btn-outline btn-lg" href="#pricing">Talk to sales</a>
+        </div>
+        <p class="cta-note reveal" style="--d:220ms">Free for 14 days · No credit card · Set up in an afternoon</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="nav-logo" href="#top" aria-label="Atelio home">
+            <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M10 22l6-12 6 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            <span>Atelio</span>
+          </a>
+          <p>The studio platform for interior designers.</p>
+        </div>
+        <nav class="foot-col" aria-label="Product">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#features">Integrations</a>
+          <a href="#features">Changelog</a>
+        </nav>
+        <nav class="foot-col" aria-label="Company">
+          <h4>Company</h4>
+          <a href="#stories">Customers</a>
+          <a href="#top">About</a>
+          <a href="#top">Careers</a>
+          <a href="#top">Press</a>
+        </nav>
+        <nav class="foot-col" aria-label="Resources">
+          <h4>Resources</h4>
+          <a href="#faq">Help center</a>
+          <a href="#how">Getting started</a>
+          <a href="#top">Templates</a>
+          <a href="#top">Blog</a>
+        </nav>
+        <nav class="foot-col" aria-label="Legal">
+          <h4>Legal</h4>
+          <a href="#top">Privacy</a>
+          <a href="#top">Terms</a>
+          <a href="#top">Security</a>
+          <a href="#top">DPA</a>
+        </nav>
+      </div>
+      <div class="foot-bottom">
+        <p>© <span id="year">2026</span> Atelio, Inc. All rights reserved.</p>
+        <p>Designed with restraint.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+(() => {
+  "use strict";
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Nav: border on scroll ---------- */
+  const nav = document.getElementById("nav");
+  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---------- Mobile menu ---------- */
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("mobileMenu");
+
+  const closeMenu = () => {
+    burger.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Open menu");
+    menu.hidden = true;
+  };
+
+  burger.addEventListener("click", () => {
+    const open = menu.hidden;
+    burger.classList.toggle("open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menu.hidden = !open;
+  });
+
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 880) closeMenu();
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  const revealEls = document.querySelectorAll(".reveal");
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealEls.forEach((el) => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    revealEls.forEach((el) => io.observe(el));
+  }
+
+  /* ---------- Stat counters ---------- */
+  const counters = document.querySelectorAll(".count");
+
+  const renderCount = (el, value) => {
+    const prefix = el.dataset.prefix || "";
+    const suffix = el.dataset.suffix || "";
+    el.innerHTML = prefix + value.toLocaleString("en-US") + suffix;
+  };
+
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      renderCount(el, Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    counters.forEach((el) => renderCount(el, parseInt(el.dataset.target, 10)));
+  } else {
+    const cio = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            cio.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    counters.forEach((el) => cio.observe(el));
+  }
+
+  /* ---------- Pricing toggle ---------- */
+  const btnMonthly = document.getElementById("btnMonthly");
+  const btnAnnual = document.getElementById("btnAnnual");
+
+  const setBilling = (period) => {
+    const annual = period === "a";
+    btnAnnual.classList.toggle("active", annual);
+    btnMonthly.classList.toggle("active", !annual);
+    btnAnnual.setAttribute("aria-pressed", String(annual));
+    btnMonthly.setAttribute("aria-pressed", String(!annual));
+    document.querySelectorAll(".plan-price .amount").forEach((el) => {
+      el.textContent = "$" + el.dataset[period];
+    });
+    document.querySelectorAll(".plan-billed").forEach((el) => {
+      el.textContent = el.dataset[period];
+    });
+  };
+
+  btnMonthly.addEventListener("click", () => setBilling("m"));
+  btnAnnual.addEventListener("click", () => setBilling("a"));
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll(".faq-item").forEach((item) => {
+    const btn = item.querySelector(".faq-q");
+    const panel = item.querySelector(".faq-a");
+    btn.addEventListener("click", () => {
+      const open = panel.hidden;
+      document.querySelectorAll(".faq-item.open").forEach((other) => {
+        if (other === item) return;
+        other.classList.remove("open");
+        other.querySelector(".faq-a").hidden = true;
+        other.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+      });
+      item.classList.toggle("open", open);
+      panel.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+
+  /* ---------- Footer year ---------- */
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+
+</script>
+</body>
+</html>
